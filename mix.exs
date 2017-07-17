@@ -31,6 +31,7 @@ defmodule BmMigration.Mixfile do
     [{:floki, "~> 0.17.2"},
      {:httpoison, "~> 0.12.0"},
      {:poison, "~> 3.1"},
-     {:hound, "~> 1.0"}]
+     {:hound, "~> 1.0"},
+     {:envy, "~> 1.1"}]
   end
 end
