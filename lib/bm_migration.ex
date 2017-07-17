@@ -6,6 +6,7 @@ defmodule BmMigration do
   def start do
     Hound.start_session
     login()
+    Hound.end_session()
   end
 
   def login do
@@ -19,8 +20,10 @@ defmodule BmMigration do
     find_element(:id, "session_email_address") |> fill_field(user)
     find_element(:id, "session_password") |> fill_field(passwd)
     find_element(:name, "button") |> submit_element
+    # find_element(:class, "details__name") |> visible_text
+  end
 
-    username = find_element(:class, "details__name") |> visible_text
-    IO.puts username
+  def logout do
+    delete_cookies()
   end
 end
