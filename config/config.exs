@@ -29,4 +29,4 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
-config :hound, driver: "phantomjs", host: "http://localhost", port: 5555
+config :hound, driver: "phantomjs", host: "http://localhost", port: 5555, loadImages: false
