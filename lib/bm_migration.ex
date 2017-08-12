@@ -1,5 +1,4 @@
 defmodule BmMigration do
-  use Hound.Helpers
   require Crawler
 
   def start do
@@ -7,8 +6,7 @@ defmodule BmMigration do
       Envy.auto_load
     end
 
-    Hound.start_session()
-    Crawler.crawl()
-    Hound.end_session()
+    result = Crawler.crawl()
+    IO.puts result
   end
 end

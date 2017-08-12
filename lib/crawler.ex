@@ -6,14 +6,19 @@ defmodule Crawler do
   @book_status ["read", "reading", "stacked", "wish"]
 
   def crawl do
+    Hound.start_session()
     login()
     %{id: userid, book_nums: book_nums} = get_userdata()
+
     json =
       book_nums
       |> status_with_num
       |> Enum.flat_map(&(fetch_bookdatas(userid, &1)))
-    save_json(@result_json, json)
+    result = save_json(@result_json, json)
+
     logout()
+    Hound.end_session()
+    result
   end
 
   def status_with_num(book_nums) do
@@ -50,7 +55,7 @@ defmodule Crawler do
 
   def userid do
     id_href =
-      find_element(:class, "personal-account__data__link")
+      find_element(:css, ".user-profiles__avatar > a")
       |> attribute_value("href")
     Enum.at(Regex.run(~r/\d+/, id_href), 0)
   end
@@ -105,8 +110,8 @@ defmodule Crawler do
     end
   end
 
-  def fetch_books(page, base_url, xpath) do
-    url = "#{base_url}&page=#{page}"
+  def fetch_books(page, booklist_url, xpath) do
+    url = "#{booklist_url}&page=#{page}"
     IO.puts "accessing to #{url}"
     :timer.sleep(1000) # 1sec
     navigate_to(url, 5)
