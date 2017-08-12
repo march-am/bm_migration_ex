@@ -10,28 +10,16 @@ defmodule BmMigration.Mixfile do
      deps: deps()]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :httpoison, :hound]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:my_dep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
-    [{:floki, "~> 0.17.2"},
-     {:httpoison, "~> 0.12.0"},
-     {:poison, "~> 3.1"},
+    [{:csv, "~> 2.0"},
+     {:envy, "~> 1.1"},
+     {:floki, "~> 0.17.2"},
      {:hound, "~> 1.0"},
-     {:envy, "~> 1.1"}]
+     {:httpoison, "~> 0.12.0"},
+     {:poison, "~> 3.1"}]
   end
 end
